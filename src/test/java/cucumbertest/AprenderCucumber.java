@@ -1,5 +1,10 @@
 package cucumbertest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Assert;
 
 import cucumber.api.java.pt.Dado;
@@ -43,4 +48,35 @@ public class AprenderCucumber {
 	    // Assert.assertTrue(arg1 == contador);
 	    Assert.assertEquals(arg1, contador);
 	}
+	
+	Date entrega = new Date();
+	
+	@Dado("^que a entrega é dia (\\d+)/(\\d+)/(\\d+)$")
+	public void queAEntregaÉDia(Integer dia, Integer mes, Integer ano) throws Throwable {
+	    Calendar calen = Calendar.getInstance();
+	    calen.set(Calendar.DAY_OF_MONTH, dia);
+	    calen.set(Calendar.MONTH, mes - 1);
+	    calen.set(Calendar.YEAR, ano);
+	    entrega = calen.getTime();
+	}
+
+	@Quando("^a entrega atrasar em (\\d+) (dia|dias|mes|meses)$")
+	public void aEntregaAtrasarEmDias(Integer dia, String tempo) throws Throwable {
+		Calendar calen = Calendar.getInstance();
+		calen.setTime(entrega);
+		if (tempo.equals("dias")) {
+			calen.add(Calendar.DAY_OF_MONTH, dia);
+		} else {
+			calen.add(Calendar.MONTH, dia);
+		}
+	    entrega = calen.getTime();
+	}
+
+	@Então("^a entrega será efetuada em (\\d{2}\\/\\d{2}\\/\\d{4})$")
+	public void aEntregaSeráEfetuadaEm(String data) throws Throwable {
+	    DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	    String dataFormatada = format.format(entrega);
+	    Assert.assertEquals(data, dataFormatada);
+	}
+
 }
