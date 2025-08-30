@@ -1,4 +1,4 @@
-package cucumbertest;
+package br.com.radames.steps;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Então;
 import cucumber.api.java.pt.Quando;
 
-public class AprenderCucumber {
+public class AprenderCucumberSteps {
 
 	@Dado("^que criei o arquivo corretamente$")
 	public void queCrieiOArquivoCorretamente() throws Throwable {
@@ -78,5 +78,35 @@ public class AprenderCucumber {
 	    String dataFormatada = format.format(entrega);
 	    Assert.assertEquals(data, dataFormatada);
 	}
+	
+	//String ticket = "";
 
+	@Dado("^que o ticket é AF(\\d+)$")
+	public void queOTicketÉAF(int tkt) throws Throwable {
+		//ticket = tkt;
+	}
+
+	@Dado("^que o valor da passagem é R\\$ (\\d+),(\\d+)$")
+	public void queOValorDaPassagemÉR$(Double double1) throws Throwable {
+	}
+
+	@Dado("^que o nome do passageiro é \"(.*)\"$")
+	public void queONomeDoPassageiroÉ(String string) throws Throwable {
+	    
+	}
+
+	@Dado("^que o telefone do passageiro é (\\d+)(\\d+)$")
+	public void queOTelefoneDoPassageiroÉ(Integer int1, Integer int2) throws Throwable {
+	    
+	}
+
+	@Quando("^criar os steps$")
+	public void criarOsSteps() throws Throwable {
+	    
+	}
+
+	@Então("^o teste vai funcionar$")
+	public void oTesteVaiFuncionar() throws Throwable {
+	    
+	}
 }
